@@ -8,4 +8,16 @@ st.title("Hello")
 f = Figlet(font='slant')
 st.text(f.renderText('Hello, Streamlit!'))
 
-st.text_input("Movie title", "Life of Brian")
+
+# Check if the user is the owner
+is_owner = st.session_state.get('is_owner', False)
+
+# Create a text area that is editable for the owner and read-only for others
+text = st.text_area("Enter your text here:", "This is a sample text.", disabled=not is_owner)
+
+# Display the text
+st.write("You entered:", text)
+
+# Button to toggle edit mode (for demonstration purposes)
+if st.button("Toggle Edit Mode"):
+    st.session_state.is_owner = not st.session_state.get('is_owner', False)
