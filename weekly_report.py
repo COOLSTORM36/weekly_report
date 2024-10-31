@@ -1,5 +1,5 @@
 import streamlit as st
-from pyfiglet import 
+from pyfiglet import Figlet
 
 st.title("Hello")
 
