@@ -21,7 +21,7 @@ while True:
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     # Update the placeholder with the current time
-    placeholder.write(f"Current time: {current_time}")
+    placeholder.subheader(f"Current time: {current_time}")
     
     # Wait for 1 second before updating again
     time.sleep(1)
