@@ -7,3 +7,5 @@ st.title("Hello")
 
 f = Figlet(font='slant')
 st.text(f.renderText('Hello, Streamlit!'))
+
+st.text(height = 100)
