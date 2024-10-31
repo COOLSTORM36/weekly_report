@@ -1,6 +1,7 @@
 import streamlit as st
 from datetime import datetime
 from pyfiglet import Figlet
+import time
 
 st. set_page_config(layout="wide")
 
@@ -12,8 +13,15 @@ st.text(f.renderText('Solution Team'))
 
 
 
-# Get the current time
-current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+# Create a placeholder
+placeholder = st.empty()
 
-# Display the current time in Streamlit
-st.write("Current time:", current_time)
+while True:
+    # Get the current time
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # Update the placeholder with the current time
+    placeholder.write(f"Current time: {current_time}")
+    
+    # Wait for 1 second before updating again
+    time.sleep(1)
