@@ -21,7 +21,7 @@ while True:
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     # Update the placeholder with the current time
-    placeholder.subheader(f"Current time: {current_time}")
+    placeholder.markdown(f"<h2 style='text-align: center;'>Current UK time: {current_time}</h2>", unsafe_allow_html=True)
     
     # Wait for 1 second before updating again
     time.sleep(1)
