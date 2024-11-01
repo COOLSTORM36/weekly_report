@@ -7,7 +7,7 @@ st. set_page_config(layout="wide")
 
 st.title("Hello")
 
-f = Figlet(font='slant')
+f = Figlet(font='doh')
 st.text(f.renderText('Solution Team'))
 
 
