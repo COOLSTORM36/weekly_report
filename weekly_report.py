@@ -12,6 +12,7 @@ from datetime import datetime, timedelta
 # imoport pyairtable
 from pyairtable import Api
 from pyairtable import Table
+from pyairtable import Base
 from pyairtable.formulas import match
 
 st.set_page_config(layout="wide")
