@@ -36,7 +36,25 @@ def week_of_date(date):
 
 now = datetime.now()
 formatted_date = week_of_date(now)
+
 # ------------------------------------------------------------------------------------------------
+# fetch the data from product roadmap
+PRODUCT_ROADMAP_TAB = Table(None, base, '欧洲产品路线图log')
+data = match({"Week": formatted_date})
+Product_Roadmap_result = PRODUCT_ROADMAP_TAB.all(formula=data) 
+
+product_roadmap_flattened_data = []
+for item in Product_Roadmap_result:
+    flat_item = item['fields']
+    product_roadmap_flattened_data.append(flat_item)
+
+# Convert to DataFrame
+product_roadmap_df = pd.DataFrame(product_roadmap_flattened_data)
+try:
+    Product_Roadmap = product_roadmap_df[['产品特性', '备注', '基线完成时间', '实际完成预估时间']]
+except KeyError:
+    Product_Roadmap = product_roadmap_df
+
 # fetch the data from market insight
 MARKET_INSIGHT_TAB = Table(None, base, '市场洞察')
 data = match({"Week": formatted_date})
@@ -76,7 +94,8 @@ st.subheader(formatted_date)
 
 # ------------------------------------------------------------------------------------------------
 st.header("1. 产品规划路线图（Kayla）")
-st.text_area("产品规划路线图更新", height=100)
+st.dataframe(Product_Roadmap, hide_index=True, use_container_width=True)
+st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/shr8NKcUH8XAZQCXv" target="_blank">here</a> to Read More', unsafe_allow_html=True)
 
 # ------------------------------------------------------------------------------------------------
 st.header("2. 关键需求管理（颖怡）")
