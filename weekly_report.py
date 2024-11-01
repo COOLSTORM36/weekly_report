@@ -7,7 +7,7 @@ st.set_page_config(layout="wide")
 
 st.title("Hello")
 
-st.title(st.secrets["AT_API_KEY"])
+AT_API_KEY = st.secrets["AT_API_KEY"]
 
 # Create a placeholder
 placeholder = st.empty()
