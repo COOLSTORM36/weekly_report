@@ -41,7 +41,7 @@ formatted_date = week_of_date(now)
 # ------------------------------------------------------------------------------------------------
 # get the data from airtable
 data = match({"Week": formatted_date})
-result = table.all(formula=PROD_DOC_LOG_TAB)
+result = PROD_DOC_LOG_TAB.all(formula=data)
 
 # Extract fields and flatten the structure
 flattened_data = []
