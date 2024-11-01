@@ -1,3 +1,4 @@
+# import prerequisite
 import streamlit as st
 from datetime import datetime
 from pyfiglet import Figlet
@@ -18,13 +19,14 @@ st.set_page_config(layout="wide")
 
 st.title("Hello")
 
-AT_API_KEY = st.secrets["AT_API_KEY"]
-
-
 # ------------------------------------------------------------------------------------------------
 # import airtable API key
+AT_API_KEY = st.secrets["AT_API_KEY"]
 
-table = Table(AT_API_KEY, 'appyobVRNRPGJFNSV', 'tbl5trjDXTokyuUMF')
+# ------------------------------------------------------------------------------------------------
+# fetch data from products doc table log
+
+PROD_DOC_LOG_TAB = Table(AT_API_KEY, 'appyobVRNRPGJFNSV', 'tbl5trjDXTokyuUMF')
 
 # ------------------------------------------------------------------------------------------------
 # function to get the week of the date
@@ -39,9 +41,7 @@ formatted_date = week_of_date(now)
 # ------------------------------------------------------------------------------------------------
 # get the data from airtable
 data = match({"Week": formatted_date})
-result = table.all(formula=data)
-
-
+result = table.all(formula=PROD_DOC_LOG_TAB)
 
 # Extract fields and flatten the structure
 flattened_data = []
