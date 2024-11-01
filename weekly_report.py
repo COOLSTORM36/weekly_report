@@ -3,15 +3,11 @@ from datetime import datetime
 from pyfiglet import Figlet
 import time
 
-st. set_page_config(layout="wide")
+st.set_page_config(layout="wide")
 
 st.title("Hello")
 
-f = Figlet(font='isometric1')
-st.text(f.renderText('Solution Team'))
-
-
-
+st.title(AT_API_KEY)
 
 # Create a placeholder
 placeholder = st.empty()
