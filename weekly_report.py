@@ -17,16 +17,15 @@ from pyairtable.formulas import match
 
 st.set_page_config(layout="wide")
 
-st.title("Hello")
-
 # ------------------------------------------------------------------------------------------------
 # import airtable API key
 AT_API_KEY = st.secrets["AT_API_KEY"]
 
 # ------------------------------------------------------------------------------------------------
-# fetch data from products doc table log
-
-PROD_DOC_LOG_TAB = Table(AT_API_KEY, 'appyobVRNRPGJFNSV', 'tbl5trjDXTokyuUMF')
+# import airtable API key, configure the table
+auth_token = AT_API_KEY
+api = Api(auth_token)
+base = Base(api, 'appyobVRNRPGJFNSV')
 
 # ------------------------------------------------------------------------------------------------
 # function to get the week of the date
@@ -37,24 +36,38 @@ def week_of_date(date):
 
 now = datetime.now()
 formatted_date = week_of_date(now)
-
 # ------------------------------------------------------------------------------------------------
-# get the data from airtable
+# fetch the data from market insight
+MARKET_INSIGHT_TAB = Table(None, base, '市场洞察')
 data = match({"Week": formatted_date})
-result = PROD_DOC_LOG_TAB.all(formula=data)
+Market_Insight_result = MARKET_INSIGHT_TAB.all(formula=data)
 
-# Extract fields and flatten the structure
-flattened_data = []
-for item in result:
+market_insight_flattened_data = []
+for item in Market_Insight_result:
+    flat_item = item['fields']
+    market_insight_flattened_data.append(flat_item)
+
+# Convert to DataFrame
+market_insight_df = pd.DataFrame(market_insight_flattened_data)
+Market_Insight = market_insight_df.drop(columns=['Attachment', 'Link to Details', '领域分类', '中文详情', 'English Title', '输入人', 'Ready', '记录日期', 'Week', '周报？'])
+
+
+# fetch the data from products doc log
+PROD_DOC_LOG_TAB = Table(None, base, '产品资料库更新LOG')
+data = match({"Week": formatted_date})
+Prod_Doc_log_result = PROD_DOC_LOG_TAB.all(formula=data)
+
+prod_doc_log_flattened_data = []
+for item in Prod_Doc_log_result:
     flat_item = item['fields']
     # Add the "产品变种 Variant Name" field if it doesn't exist
     if '产品变种 Variant Name' not in flat_item:
         flat_item['产品变种 Variant Name'] = ''
-    flattened_data.append(flat_item)
+    prod_doc_log_flattened_data.append(flat_item)
 
 # Convert to DataFrame
-df = pd.DataFrame(flattened_data)
-Prod_Doc_log = df.drop(columns=['Modify time', 'Week'])
+prod_doc_log_df = pd.DataFrame(prod_doc_log_flattened_data)
+Prod_Doc_log = prod_doc_log_df.drop(columns=['Modify time', 'Week'])
 
 # ------------------------------------------------------------------------------------------------
 # Streamlit Framework
@@ -74,6 +87,7 @@ st.text_area("RMT会议纪要", height=100)
 st.header("3. 样机管理(颖怡)")
 st.text_area("样机管理更新", height=100)
 
+st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/pagSix3iZiaXnRkiv" target="_blank">here</a> to Read More', unsafe_allow_html=True)
 # ------------------------------------------------------------------------------------------------
 st.header("4. 测试计划路线图（穆朕）")
 st.text_area("测试计划路线图更新", height=100)
@@ -81,13 +95,17 @@ st.text_area("测试计划路线图更新", height=100)
 # ------------------------------------------------------------------------------------------------
 st.header("5. 市场洞察&产品资料库更新（Kayla&暐晟）")
 st.subheader("a) 市场洞察")
-st.text_area("市场洞察更新", height=100)
+st.dataframe(Market_Insight, hide_index=True)
+
+st.text("Read more:")
+st.markdown('<a href="https://airtable.com/appkXGg44hvl2aahl/shrIlvjhIxdF9tVVk" target="_blank">中文版本</a>', unsafe_allow_html=True)
+st.markdown('<a href="https://airtable.com/appkXGg44hvl2aahl/shrqVDDCURO8T5SKa" target="_blank">English Version</a>', unsafe_allow_html=True)
+
 st.subheader("b) 产品资料库更新")
-Prod_Doc_log.index = [''] * len(Prod_Doc_log)
 st.dataframe(Prod_Doc_log, hide_index=True)
 
 # st.markdown("https://airtable.com/appyobVRNRPGJFNSV/shr80zbdjJbo8bKnn/tbl5trjDXTokyuUMF")
-st.markdown('<a href="https://airtable.com/appyobVRNRPGJFNSV/shr80zbdjJbo8bKnn/tbl5trjDXTokyuUMF" target="_blank">Click here to Read More</a>', unsafe_allow_html=True)
+st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/shrZdNUfuawVDC9Xg" target="_blank">here</a> to Read More', unsafe_allow_html=True)
 
 # ------------------------------------------------------------------------------------------------
 st.header("6. 小组周主要任务更新")
