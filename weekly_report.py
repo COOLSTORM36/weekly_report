@@ -5,7 +5,6 @@ from pyfiglet import Figlet
 import time
 
 import os
-import psutil
 import pandas as pd
 
 from datetime import datetime, timedelta
