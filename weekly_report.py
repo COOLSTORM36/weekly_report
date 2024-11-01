@@ -84,7 +84,7 @@ st.subheader("a) 市场洞察")
 st.text_area("市场洞察更新", height=100)
 st.subheader("b) 产品资料库更新")
 Prod_Doc_log.index = [''] * len(Prod_Doc_log)
-st.table(Prod_Doc_log)
+st.dataframe(Prod_Doc_log)
 
 # st.markdown("https://airtable.com/appyobVRNRPGJFNSV/shr80zbdjJbo8bKnn/tbl5trjDXTokyuUMF")
 st.markdown('<a href="https://airtable.com/appyobVRNRPGJFNSV/shr80zbdjJbo8bKnn/tbl5trjDXTokyuUMF" target="_blank">Click here to Read More</a>', unsafe_allow_html=True)
