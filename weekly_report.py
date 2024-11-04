@@ -67,7 +67,10 @@ for item in Market_Insight_result:
 
 # Convert to DataFrame
 market_insight_df = pd.DataFrame(market_insight_flattened_data)
-Market_Insight = market_insight_df.drop(columns=['Attachment', 'Link to Details', '领域分类', '中文详情', 'English Title', '输入人', 'Ready', '记录日期', 'Week', '周报？'])
+try:
+    Market_Insight = market_insight_df.drop(columns=['Attachment', 'Link to Details', '领域分类', '中文详情', 'English Title', '输入人', 'Ready', '记录日期', 'Week', '周报？'])
+except KeyError:
+    Market_Insight = market_insight_df
 
 
 # fetch the data from products doc log
@@ -76,21 +79,33 @@ data = match({"Week": formatted_date})
 Prod_Doc_log_result = PROD_DOC_LOG_TAB.all(formula=data)
 
 prod_doc_log_flattened_data = []
-for item in Prod_Doc_log_result:
-    flat_item = item['fields']
-    # Add the "产品变种 Variant Name" field if it doesn't exist
-    if '产品变种 Variant Name' not in flat_item:
-        flat_item['产品变种 Variant Name'] = ''
-    prod_doc_log_flattened_data.append(flat_item)
+try:
+    for item in Prod_Doc_log_result:
+        flat_item = item['fields']
+        # Add the "产品变种 Variant Name" field if it doesn't exist
+        if '产品变种 Variant Name' not in flat_item:
+            flat_item['产品变种 Variant Name'] = ''
+            prod_doc_log_flattened_data.append(flat_item)
+except KeyError:
+    prod_doc_log_flattened_data = []
 
 # Convert to DataFrame
 prod_doc_log_df = pd.DataFrame(prod_doc_log_flattened_data)
-Prod_Doc_log = prod_doc_log_df.drop(columns=['Modify time', 'Week'])
+try:
+    Prod_Doc_log = prod_doc_log_df.drop(columns=['Modify time', 'Week'])
+except KeyError:
+    Prod_Doc_log = prod_doc_log_df
 
 # ------------------------------------------------------------------------------------------------
 # Streamlit Framework
 st.title("本周小组任务更新")
 st.subheader(formatted_date)
+
+# ------------------------------------------------------------------------------------------------
+# Display the team photo
+# image = Image.open("Solution Team banner in rectangle size.png")
+# image = image.resize((300, 300))  # Adjust the size as needed
+# st.image(image, use_column_width=False)
 
 # ------------------------------------------------------------------------------------------------
 st.header("1. 产品规划路线图（Kayla）")
