@@ -67,10 +67,10 @@ for item in Market_Insight_result:
 
 # Convert to DataFrame
 market_insight_df = pd.DataFrame(market_insight_flattened_data)
-try:
+if 'Attachment' in market_insight_df.columns and market_insight_df['Attachment'].notnull().any():
     Market_Insight = market_insight_df.drop(columns=['Attachment', 'Link to Details', '领域分类', '中文详情', 'English Title', '输入人', 'Ready', '记录日期', 'Week', '周报？'])
-except KeyError:
-    Market_Insight = market_insight_df
+else:
+    Market_Insight = market_insight_df.drop(columns=['Link to Details', '领域分类', '中文详情', 'English Title', '输入人', 'Ready', '记录日期', 'Week', '周报？'])
 
 
 # fetch the data from products doc log
