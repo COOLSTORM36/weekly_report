@@ -90,16 +90,13 @@ try:
     for item in Prod_Doc_log_result:
         flat_item = item['fields']
         # Add the "产品变种 Variant Name" field if it doesn't exist
-        if '产品变种 Variant Name' not in flat_item:
-            flat_item['产品变种 Variant Name'] = ''
-            prod_doc_log_flattened_data.append(flat_item)
 except KeyError:
     prod_doc_log_flattened_data = []
 
 # Convert to DataFrame
 prod_doc_log_df = pd.DataFrame(prod_doc_log_flattened_data)
 try:
-    Prod_Doc_log = prod_doc_log_df.drop(columns=['Modify time', 'Week'])
+    Prod_Doc_log = prod_doc_log_df.drop(columns=['Modify time', 'Week', '产品变种'])
 except KeyError:
     Prod_Doc_log = prod_doc_log_df
 
