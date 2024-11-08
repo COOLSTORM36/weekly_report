@@ -96,7 +96,7 @@ except KeyError:
 # Convert to DataFrame
 prod_doc_log_df = pd.DataFrame(prod_doc_log_flattened_data)
 try:
-    Prod_Doc_log = prod_doc_log_df.drop(columns=['Modify time', 'Week', '产品变种'])
+    Prod_Doc_log = prod_doc_log_df.drop(columns=['Modify time', 'Week', '产品变种 Variant Name'])
 except KeyError:
     Prod_Doc_log = prod_doc_log_df
 
