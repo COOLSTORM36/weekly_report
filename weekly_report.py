@@ -39,19 +39,26 @@ formatted_date = week_of_date(now)
 
 # ------------------------------------------------------------------------------------------------
 # fetch the data from product roadmap
-PRODUCT_ROADMAP_TAB = Table(None, base, '欧洲产品路线图log')
-data = match({"Week": formatted_date})
-Product_Roadmap_result = PRODUCT_ROADMAP_TAB.all(formula=data) 
+PRODUCT_ROADMAP_TAB = Table(None, base, '欧洲产品路线图')
+condition = match({"周报": True})
+Product_Roadmap_result = PRODUCT_ROADMAP_TAB.all(formula=condition)
 
 product_roadmap_flattened_data = []
 for item in Product_Roadmap_result:
-    flat_item = item['fields']
+    flat_item = {
+        '产品特性': item['fields'].get('产品特性', ''),
+        '备注': item['fields'].get('备注', ''),
+        '时间线备注': item['fields'].get('时间线备注', ''),
+        '基线完成时间': item['fields'].get('基线完成时间', ''),
+        '实际完成预估时间': item['fields'].get('实际完成预估时间', '')
+    }
     product_roadmap_flattened_data.append(flat_item)
 
 # Convert to DataFrame
 product_roadmap_df = pd.DataFrame(product_roadmap_flattened_data)
+
 try:
-    Product_Roadmap = product_roadmap_df[['产品特性', '备注', '基线完成时间', '实际完成预估时间']]
+    Product_Roadmap = product_roadmap_df[['产品特性', '备注', '时间线备注', '基线完成时间', '实际完成预估时间']]
 except KeyError:
     Product_Roadmap = product_roadmap_df
 
