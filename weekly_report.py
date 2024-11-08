@@ -90,9 +90,9 @@ try:
     for item in Prod_Doc_log_result:
         flat_item = item['fields']
         # Add the "产品变种 Variant Name" field if it doesn't exist
-    if '产品变种 Variant Name' not in flat_item:
-                flat_item['产品变种 Variant Name'] = ''
-                prod_doc_log_flattened_data.append(flat_item)
+        if '产品变种 Variant Name' not in flat_item:
+            flat_item['产品变种 Variant Name'] = ''
+            prod_doc_log_flattened_data.append(flat_item)
 except KeyError:
     prod_doc_log_flattened_data = []
 
