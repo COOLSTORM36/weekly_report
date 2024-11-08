@@ -116,7 +116,8 @@ st.subheader(formatted_date)
 
 # ------------------------------------------------------------------------------------------------
 st.header("1. 产品规划路线图（Kayla）")
-st.dataframe(Product_Roadmap, hide_index=True, use_container_width=True)
+# st.dataframe(Product_Roadmap, hide_index=True, use_container_width=True)
+st.table(Product_Roadmap)
 st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/shr8NKcUH8XAZQCXv" target="_blank">here</a> to Read More', unsafe_allow_html=True)
 
 # ------------------------------------------------------------------------------------------------
@@ -136,14 +137,16 @@ st.text_area("测试计划路线图更新", height=100)
 # ------------------------------------------------------------------------------------------------
 st.header("5. 市场洞察&产品资料库更新（Kayla&暐晟）")
 st.subheader("a) 市场洞察")
-st.dataframe(Market_Insight, hide_index=True, use_container_width=True)
+# st.dataframe(Market_Insight, hide_index=True, use_container_width=True)
+st.table(Market_Insight)
 
 st.text("Read more:")
 st.markdown('<a href="https://airtable.com/appkXGg44hvl2aahl/shrIlvjhIxdF9tVVk" target="_blank">中文版本</a>', unsafe_allow_html=True)
 st.markdown('<a href="https://airtable.com/appkXGg44hvl2aahl/shrqVDDCURO8T5SKa" target="_blank">English Version</a>', unsafe_allow_html=True)
 
 st.subheader("b) 产品资料库更新")
-st.dataframe(Prod_Doc_log, hide_index=True, use_container_width=True)
+# st.dataframe(Prod_Doc_log, hide_index=True, use_container_width=True)
+st.table(Prod_Doc_log)
 
 # st.markdown("https://airtable.com/appyobVRNRPGJFNSV/shr80zbdjJbo8bKnn/tbl5trjDXTokyuUMF")
 st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/shrZdNUfuawVDC9Xg" target="_blank">here</a> to Read More', unsafe_allow_html=True)
