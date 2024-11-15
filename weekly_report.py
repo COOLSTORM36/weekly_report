@@ -25,8 +25,8 @@ AT_API_KEY = st.secrets["AT_API_KEY"]
 # import airtable API key, configure the table
 auth_token = AT_API_KEY
 api = Api(auth_token)
-base = Base(api, 'appyobVRNRPGJFNSV')
-
+solution_base = Base(api, 'appyobVRNRPGJFNSV')
+RMT_base = Base(api, 'appiPDknThxWdhHR2')
 # ------------------------------------------------------------------------------------------------
 # function to get the week of the date
 def week_of_date(date):
@@ -36,10 +36,22 @@ def week_of_date(date):
 
 now = datetime.now()
 formatted_date = week_of_date(now)
+# ------------------------------------------------------------------------------------------------
+# set the font size of the dataframe
+# st.markdown(
+#     """
+#     <style>
+#     .dataframe tbody tr td {
+#         font-size: 8px;
+#     }
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+# )
 
 # ------------------------------------------------------------------------------------------------
 # fetch the data from product roadmap
-PRODUCT_ROADMAP_TAB = Table(None, base, '欧洲产品路线图')
+PRODUCT_ROADMAP_TAB = Table(None, solution_base, '欧洲产品路线图')
 condition = match({"周报": True})
 Product_Roadmap_result = PRODUCT_ROADMAP_TAB.all(formula=condition)
 
@@ -62,8 +74,28 @@ try:
 except KeyError:
     Product_Roadmap = product_roadmap_df
 
+# fetch the data from RMT requirement list
+RMT_TAB = Table(None, RMT_base, 'Requirement List')
+condition = match({"RMT会议": True})
+RMT_result = RMT_TAB.all(formula=condition)
+
+RMT_flattened_data = []
+for item in RMT_result:
+    flat_item = item['fields']
+    RMT_flattened_data.append(flat_item)
+
+RMT_df = pd.DataFrame(RMT_flattened_data)
+
+RMT_df['研发承诺时间.'] = RMT_df['研发承诺时间.'].fillna('')
+RMT_df['预测交付时间.'] = RMT_df['预测交付时间.'].fillna('')
+
+try:
+    RMT = RMT_df[['需求简述', '国家/区域', '需求优先级', 'Status Name', '研发进展更新', '研发承诺时间.', '预测交付时间.']]
+except KeyError:
+    RMT = RMT_df
+
 # fetch the data from market insight
-MARKET_INSIGHT_TAB = Table(None, base, '市场洞察')
+MARKET_INSIGHT_TAB = Table(None, solution_base, '市场洞察')
 data = match({"Week": formatted_date})
 Market_Insight_result = MARKET_INSIGHT_TAB.all(formula=data)
 
@@ -81,7 +113,7 @@ else:
 
 
 # fetch the data from products doc log
-PROD_DOC_LOG_TAB = Table(None, base, '产品资料库更新LOG')
+PROD_DOC_LOG_TAB = Table(None, solution_base, '产品资料库更新LOG')
 data = match({"Week": formatted_date})
 Prod_Doc_log_result = PROD_DOC_LOG_TAB.all(formula=data)
 
@@ -123,7 +155,7 @@ st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/shr8NKcUH8XAZ
 # ------------------------------------------------------------------------------------------------
 st.header("2. 关键需求管理（颖怡）")
 st.subheader("a) RMT会议纪要")
-st.text_area("RMT会议纪要", height=100)
+st.table(RMT)
 
 # ------------------------------------------------------------------------------------------------
 st.header("3. 样机管理(颖怡)")
