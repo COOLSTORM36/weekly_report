@@ -90,9 +90,11 @@ RMT_df['研发承诺时间.'] = RMT_df['研发承诺时间.'].fillna('')
 RMT_df['预测交付时间.'] = RMT_df['预测交付时间.'].fillna('')
 
 try:
-    RMT = RMT_df[['需求简述', '国家/区域', '需求优先级', 'Status Name', '研发进展更新', '研发承诺时间.', '预测交付时间.']]
+    RMT = RMT_df[['需求简述', '国家/区域', 'Status Name', '需求优先级', '研发进展更新', '研发承诺时间.', '预测交付时间.']]
 except KeyError:
     RMT = RMT_df
+
+RMT = RMT.sort_values(by=['国家/区域', 'Status Name'], ascending=[True, False], ignore_index=True)
 
 # fetch the data from market insight
 MARKET_INSIGHT_TAB = Table(None, solution_base, '市场洞察')
