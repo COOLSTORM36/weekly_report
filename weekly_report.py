@@ -94,7 +94,7 @@ try:
 except KeyError:
     RMT = RMT_df
 
-RMT = RMT.sort_values(by=['国家/区域', 'Status Name'], ascending=[True, False], ignore_index=True)
+RMT = RMT.sort_values(by=['国家/区域', 'Status Name', '需求优先级'], ascending=[True, False, True], ignore_index=True)
 
 # fetch the data from market insight
 MARKET_INSIGHT_TAB = Table(None, solution_base, '市场洞察')
