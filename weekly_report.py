@@ -89,6 +89,9 @@ RMT_df = pd.DataFrame(RMT_flattened_data)
 RMT_df['研发承诺时间.'] = RMT_df['研发承诺时间.'].fillna('')
 RMT_df['预测交付时间.'] = RMT_df['预测交付时间.'].fillna('')
 
+priority_order = ["最高", "高", "中", "低"]
+RMT_df['需求优先级'] = pd.Categorical(RMT_df['需求优先级'], categories=priority_order, ordered=True)
+
 try:
     RMT = RMT_df[['需求简述', '国家/区域', 'Status Name', '需求优先级', '研发进展更新', '研发承诺时间.', '预测交付时间.']]
 except KeyError:
