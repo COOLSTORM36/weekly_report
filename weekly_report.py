@@ -151,17 +151,7 @@ st.subheader(formatted_date)
 # image = image.resize((300, 300))  # Adjust the size as needed
 # st.image(image, use_column_width=False)
 
-# ------------------------------------------------------------------------------------------------
-st.header("1. 产品规划路线图（Kayla）")
-# st.dataframe(Product_Roadmap, hide_index=True, use_container_width=True)
-st.table(Product_Roadmap)
-st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/shr8NKcUH8XAZQCXv" target="_blank">here</a> to Read More', unsafe_allow_html=True)
-
-# ------------------------------------------------------------------------------------------------
-st.header("2. 关键需求管理（颖怡）")
-st.subheader("a) RMT会议纪要")
-RMT.index = [''] * len(RMT)
-st.table(RMT)
+# Hide index from the table
 
 # Inject custom JavaScript to hide the index column
 hide_index_js = """
@@ -182,6 +172,18 @@ hide_index_js = """
 
 # Use components.html to inject the JavaScript
 st.components.v1.html(hide_index_js, height=0)
+
+# ------------------------------------------------------------------------------------------------
+st.header("1. 产品规划路线图（Kayla）")
+# st.dataframe(Product_Roadmap, hide_index=True, use_container_width=True)
+st.table(Product_Roadmap)
+st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/shr8NKcUH8XAZQCXv" target="_blank">here</a> to Read More', unsafe_allow_html=True)
+
+# ------------------------------------------------------------------------------------------------
+st.header("2. 关键需求管理（颖怡）")
+st.subheader("a) RMT会议纪要")
+RMT.index = [''] * len(RMT)
+st.table(RMT)
 
 # ------------------------------------------------------------------------------------------------
 st.header("3. 样机管理(颖怡)")
