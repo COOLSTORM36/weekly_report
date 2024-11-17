@@ -163,6 +163,26 @@ st.subheader("a) RMT会议纪要")
 RMT.index = [''] * len(RMT)
 st.table(RMT)
 
+# Inject custom JavaScript to hide the index column
+hide_index_js = """
+<script>
+    const tables = window.parent.document.querySelectorAll('table');
+    tables.forEach(table => {
+        const indexColumn = table.querySelector('thead th:first-child');
+        if (indexColumn) {
+            indexColumn.style.display = 'none';
+        }
+        const indexCells = table.querySelectorAll('tbody th');
+        indexCells.forEach(cell => {
+            cell.style.display = 'none';
+        });
+    });
+</script>
+"""
+
+# Use components.html to inject the JavaScript
+st.components.v1.html(hide_index_js, height=0)
+
 # ------------------------------------------------------------------------------------------------
 st.header("3. 样机管理(颖怡)")
 st.text_area("样机管理更新", height=100)
