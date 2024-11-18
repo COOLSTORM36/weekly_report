@@ -111,11 +111,13 @@ for item in Market_Insight_result:
 
 # Convert to DataFrame
 market_insight_df = pd.DataFrame(market_insight_flattened_data)
-if 'Attachment' in market_insight_df.columns and market_insight_df['Attachment'].notnull().any():
-    Market_Insight = market_insight_df.drop(columns=['Attachment', 'Link to Details', '领域分类', '中文详情','English Summary', 'English Title', '输入人', 'Ready', '记录日期', 'Week', '周报？'])
-else:
-    Market_Insight = market_insight_df.drop(columns=['Link to Details', '领域分类', '中文详情', 'English Summary', 'English Title', '输入人', 'Ready', '记录日期', 'Week', '周报？'])
-
+try:
+    if 'Attachment' in market_insight_df.columns and market_insight_df['Attachment'].notnull().any():
+        Market_Insight = market_insight_df.drop(columns=['Attachment', 'Link to Details', '领域分类', '中文详情','English Summary', 'English Title', '输入人', 'Ready', '记录日期', 'Week', '周报？'])
+    else:
+        Market_Insight = market_insight_df.drop(columns=['Link to Details', '领域分类', '中文详情', 'English Summary', 'English Title', '输入人', 'Ready', '记录日期', 'Week', '周报？'])
+except KeyError:
+    Market_Insight = market_insight_df
 
 # fetch the data from products doc log
 PROD_DOC_LOG_TAB = Table(None, solution_base, '产品资料库更新LOG')
