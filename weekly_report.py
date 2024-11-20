@@ -86,6 +86,12 @@ for item in RMT_result:
 
 RMT_df = pd.DataFrame(RMT_flattened_data)
 
+# Ensure columns '研发承诺时间.' and '预测交付时间.' exist in the DataFrame
+columns_to_check = ['研发承诺时间.', '预测交付时间.']
+for column in columns_to_check:
+    if column not in RMT_df.columns:
+        RMT_df[column] = ''
+
 RMT_df['研发承诺时间.'] = RMT_df['研发承诺时间.'].fillna('')
 RMT_df['预测交付时间.'] = RMT_df['预测交付时间.'].fillna('')
 
