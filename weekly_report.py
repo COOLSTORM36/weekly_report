@@ -172,34 +172,6 @@ st.title("本周小组任务更新")
 st.subheader(formatted_date)
 
 # ------------------------------------------------------------------------------------------------
-# Display the team photo
-# image = Image.open("Solution Team banner in rectangle size.png")
-# image = image.resize((300, 300))  # Adjust the size as needed
-# st.image(image, use_column_width=False)
-
-# Hide index from the table
-
-# Inject custom JavaScript to hide the index column
-hide_index_js = """
-<script>
-    const tables = window.parent.document.querySelectorAll('table');
-    tables.forEach(table => {
-        const indexColumn = table.querySelector('thead th:first-child');
-        if (indexColumn) {
-            indexColumn.style.display = 'none';
-        }
-        const indexCells = table.querySelectorAll('tbody th');
-        indexCells.forEach(cell => {
-            cell.style.display = 'none';
-        });
-    });
-</script>
-"""
-
-# Use components.html to inject the JavaScript
-st.components.v1.html(hide_index_js, height=0)
-
-# ------------------------------------------------------------------------------------------------
 st.header("1. 产品规划路线图（Kayla）")
 # st.dataframe(Product_Roadmap, hide_index=True, use_container_width=True)
 st.table(Product_Roadmap)
@@ -243,6 +215,29 @@ st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/shrZdNUfuawVD
 st.header("6. 小组周主要任务更新")
 Weekly_Task_Update.index = [''] * len(Weekly_Task_Update)
 st.table(Weekly_Task_Update)
+
+# ------------------------------------------------------------------------------------------------
+# Hide index from the table
+
+# Inject custom JavaScript to hide the index column
+hide_index_js = """
+<script>
+    const tables = window.parent.document.querySelectorAll('table');
+    tables.forEach(table => {
+        const indexColumn = table.querySelector('thead th:first-child');
+        if (indexColumn) {
+            indexColumn.style.display = 'none';
+        }
+        const indexCells = table.querySelectorAll('tbody th');
+        indexCells.forEach(cell => {
+            cell.style.display = 'none';
+        });
+    });
+</script>
+"""
+
+# Use components.html to inject the JavaScript
+st.components.v1.html(hide_index_js, height=0)
 
 # ------------------------------------------------------------------------------------------------
 # Add a button to stop the Streamlit server
