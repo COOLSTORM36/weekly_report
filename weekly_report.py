@@ -150,6 +150,22 @@ try:
 except KeyError:
     Prod_Doc_log = prod_doc_log_df
 
+# fetch the data from weekly task update
+WEEKLY_TASK_UPDATE_TAB = Table(None, solution_base, '团队任务')
+data = match({"周报": True})
+Weekly_Task_Update_result = WEEKLY_TASK_UPDATE_TAB.all(formula=data)
+
+weekly_task_update_flattened_data = []
+for item in Weekly_Task_Update_result:
+    flat_item = item['fields']
+    weekly_task_update_flattened_data.append(flat_item)
+
+Weekly_Task_Update_df = pd.DataFrame(weekly_task_update_flattened_data)
+try:
+    Weekly_Task_Update = Weekly_Task_Update_df['RAID Item']
+except KeyError:
+    Weekly_Task_Update = Weekly_Task_Update_df
+    
 # ------------------------------------------------------------------------------------------------
 # Streamlit Framework
 st.title("本周小组任务更新")
