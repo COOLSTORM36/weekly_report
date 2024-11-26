@@ -192,7 +192,6 @@ st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/shr8NKcUH8XAZ
 # ------------------------------------------------------------------------------------------------
 st.header("2. 关键需求管理（颖怡）")
 st.subheader("a) RMT会议纪要")
-RMT.index = [''] * len(RMT)
 st.table(RMT)
 
 # ------------------------------------------------------------------------------------------------
@@ -208,7 +207,6 @@ st.text_area("测试计划路线图更新", height=100)
 st.header("5. 市场洞察&产品资料库更新（Kayla&暐晟）")
 st.subheader("a) 市场洞察")
 # st.dataframe(Market_Insight, hide_index=True, use_container_width=True)
-Market_Insight.index = [''] * len(Market_Insight)
 st.table(Market_Insight)
 
 st.text("Read more:")
@@ -216,8 +214,6 @@ st.markdown('<a href="https://airtable.com/appkXGg44hvl2aahl/shrIlvjhIxdF9tVVk" 
 st.markdown('<a href="https://airtable.com/appkXGg44hvl2aahl/shrqVDDCURO8T5SKa" target="_blank">English Version</a>', unsafe_allow_html=True)
 
 st.subheader("b) 产品资料库更新")
-# st.dataframe(Prod_Doc_log, hide_index=True, use_container_width=True)
-Prod_Doc_log.index = [''] * len(Prod_Doc_log)
 st.table(Prod_Doc_log)
 
 # st.markdown("https://airtable.com/appyobVRNRPGJFNSV/shr80zbdjJbo8bKnn/tbl5trjDXTokyuUMF")
@@ -225,7 +221,7 @@ st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/shrZdNUfuawVD
 
 # ------------------------------------------------------------------------------------------------
 st.header("6. 小组周主要任务更新")
-st.text_area("小组周主要任务更新", height=150)
+st.table(Weekly_Task_Update)
 
 # ------------------------------------------------------------------------------------------------
 # Add a button to stop the Streamlit server
