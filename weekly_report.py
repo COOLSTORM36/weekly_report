@@ -159,6 +159,11 @@ except KeyError:
 st.title("本周小组任务更新")
 st.subheader(formatted_date)
 
+st.text("")
+st.text("")
+st.text("""Hi Bruce，
+
+以下是小组本周任务更新：""")
 # ------------------------------------------------------------------------------------------------
 st.header("1. 产品规划路线图（Kayla）")
 # st.dataframe(Product_Roadmap, hide_index=True, use_container_width=True)
@@ -173,12 +178,12 @@ st.table(RMT)
 
 # ------------------------------------------------------------------------------------------------
 st.header("3. 样机管理(颖怡)")
-st.text_area("样机管理更新", height=100)
 
 st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/pagSix3iZiaXnRkiv" target="_blank">here</a> to Read More', unsafe_allow_html=True)
 # ------------------------------------------------------------------------------------------------
 st.header("4. 测试计划路线图（穆朕）")
-st.text_area("测试计划路线图更新", height=100)
+
+st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/tblfjX58nWhlgQxZE/viwU3pRonYTG6REhB?blocks=hide" target="_blank">here</a> to Read More', unsafe_allow_html=True)
 
 # ------------------------------------------------------------------------------------------------
 st.header("5. 市场洞察&产品资料库更新（Kayla&暐晟）")
@@ -203,6 +208,14 @@ st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/shrZdNUfuawVD
 st.header("6. 小组周主要任务更新")
 Weekly_Task_Update.index = [''] * len(Weekly_Task_Update)
 st.table(Weekly_Task_Update)
+
+# ------------------------------------------------------------------------------------------------
+st.text("")
+st.text("""谢谢。
+
+祝好，
+
+周末愉快。""")
 
 # ------------------------------------------------------------------------------------------------
 # Hide index from the table
