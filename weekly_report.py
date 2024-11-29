@@ -36,18 +36,6 @@ def week_of_date(date):
 
 now = datetime.now()
 formatted_date = week_of_date(now)
-# ------------------------------------------------------------------------------------------------
-# set the font size of the dataframe
-# st.markdown(
-#     """
-#     <style>
-#     .dataframe tbody tr td {
-#         font-size: 8px;
-#     }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
 
 # ------------------------------------------------------------------------------------------------
 # fetch the data from product roadmap
@@ -139,7 +127,7 @@ try:
         # Add the "产品变种 Variant Name" field if it doesn't exist
         if '产品变种 Variant Name' not in flat_item:
             flat_item['产品变种 Variant Name'] = ''
-            prod_doc_log_flattened_data.append(flat_item)
+        prod_doc_log_flattened_data.append(flat_item)
 except KeyError:
     prod_doc_log_flattened_data = []
 
