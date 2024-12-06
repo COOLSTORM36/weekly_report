@@ -62,6 +62,8 @@ try:
 except KeyError:
     Product_Roadmap = product_roadmap_df
 
+Product_Roadmap = Product_Roadmap.sort_values(by=['产品特性'])
+
 # fetch the data from RMT requirement list
 RMT_TAB = Table(None, RMT_base, 'Requirement List')
 condition = match({"RMT会议": True})
@@ -93,7 +95,7 @@ try:
 except KeyError:
     RMT = RMT_df
 
-RMT = RMT.sort_values(by=['国家/区域', 'Status Name', '需求优先级'], ascending=[True, False, True], ignore_index=True)
+RMT = RMT.sort_values(by=['国家/区域', 'Status Name', '需求优先级'], ascending=[True, False, True])
 
 # fetch the data from market insight
 MARKET_INSIGHT_TAB = Table(None, solution_base, '市场洞察')
