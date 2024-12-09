@@ -59,10 +59,9 @@ product_roadmap_df = pd.DataFrame(product_roadmap_flattened_data)
 
 try:
     Product_Roadmap = product_roadmap_df[['产品特性', '备注', '时间线备注', '基线完成时间', '实际完成预估时间']]
+    Product_Roadmap = Product_Roadmap.sort_values(by=['产品特性'])
 except KeyError:
     Product_Roadmap = product_roadmap_df
-
-Product_Roadmap = Product_Roadmap.sort_values(by=['产品特性'])
 
 # fetch the data from RMT requirement list
 RMT_TAB = Table(None, RMT_base, 'Requirement List')
