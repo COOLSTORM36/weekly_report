@@ -169,25 +169,25 @@ st.text("""Hi Bruce，
 st.header("1. 产品规划路线图（Kayla）")
 # st.dataframe(Product_Roadmap, hide_index=True, use_container_width=True)
 st.table(Product_Roadmap)
-st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/shr8NKcUH8XAZQCXv" target="_blank">here</a> to Read More', unsafe_allow_html=True)
+st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/pag9rGZ4MM7Iy4LjG" target="_blank">here</a> to Read More', unsafe_allow_html=True)
 
 # ------------------------------------------------------------------------------------------------
-st.header("2. 关键需求管理（颖怡）")
+st.header("2. 关键需求管理（Kayla）")
 st.subheader("a) RMT会议纪要")
 RMT.index = [''] * len(RMT)
 st.table(RMT)
 
 # ------------------------------------------------------------------------------------------------
-st.header("3. 样机管理(颖怡)")
+st.header("3. 样机管理(Kayla & Weisheng)")
 
 st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/pagSix3iZiaXnRkiv" target="_blank">here</a> to Read More', unsafe_allow_html=True)
 # ------------------------------------------------------------------------------------------------
 st.header("4. 测试计划路线图（穆朕）")
 
-st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/tblfjX58nWhlgQxZE/viwU3pRonYTG6REhB?blocks=hide" target="_blank">here</a> to Read More', unsafe_allow_html=True)
+# st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/tblfjX58nWhlgQxZE/viwU3pRonYTG6REhB?blocks=hide" target="_blank">here</a> to Read More', unsafe_allow_html=True)
 
 # ------------------------------------------------------------------------------------------------
-st.header("5. 市场洞察&产品资料库更新（Kayla&暐晟）")
+st.header("5. 市场洞察&产品资料库更新（Kayla & Weisheng）")
 st.subheader("a) 市场洞察")
 # st.dataframe(Market_Insight, hide_index=True, use_container_width=True)
 Market_Insight.index = [''] * len(Market_Insight)
