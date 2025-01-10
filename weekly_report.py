@@ -127,6 +127,10 @@ try:
         # Add the "产品变种 Variant Name" field if it doesn't exist
         if '产品变种 Variant Name' not in flat_item:
             flat_item['产品变种 Variant Name'] = ''
+        if '文件种类 Category' not in flat_item:
+            flat_item['文件种类 Category'] = ''
+        if '语言 Locale' not in flat_item:
+            flat_item['语言 Locale'] = ''
         prod_doc_log_flattened_data.append(flat_item)
 except KeyError:
     prod_doc_log_flattened_data = []
