@@ -39,27 +39,29 @@ formatted_date = week_of_date(now)
 
 # ------------------------------------------------------------------------------------------------
 # fetch the data from product roadmap
-PRODUCT_ROADMAP_TAB = Table(None, solution_base, '欧洲产品路线图')
-condition = match({"周报": True})
-Product_Roadmap_result = PRODUCT_ROADMAP_TAB.all(formula=condition)
+PRODUCT_ROADMAP_TAB = Table(None, solution_base, 'European Roadmap')
+Product_Roadmap_result = PRODUCT_ROADMAP_TAB.all()
 
 product_roadmap_flattened_data = []
 for item in Product_Roadmap_result:
-    flat_item = {
-        '产品特性': item['fields'].get('产品特性', ''),
-        '备注': item['fields'].get('备注', ''),
-        '时间线备注': item['fields'].get('时间线备注', ''),
-        '基线完成时间': item['fields'].get('基线完成时间', ''),
-        '实际完成预估时间': item['fields'].get('实际完成预估时间', '')
-    }
+    flat_item = item['fields']
     product_roadmap_flattened_data.append(flat_item)
 
 # Convert to DataFrame
 product_roadmap_df = pd.DataFrame(product_roadmap_flattened_data)
 
+# Ensure columns 'Configurations' and 'Product Variance' exist in the DataFrame
+columns_to_check = ['Configurations', 'Product Variance']
+for column in columns_to_check:
+    if column not in product_roadmap_df.columns:
+        product_roadmap_df[column] = ''
+
+product_roadmap_df['Configurations'] = product_roadmap_df['Configurations'].fillna('')
+product_roadmap_df['Product Variance'] = product_roadmap_df['Product Variance'].fillna('')
+
 try:
-    Product_Roadmap = product_roadmap_df[['产品特性', '备注', '时间线备注', '基线完成时间', '实际完成预估时间']]
-    Product_Roadmap = Product_Roadmap.sort_values(by=['产品特性'])
+    Product_Roadmap = product_roadmap_df[['Name', 'Configurations', 'Version', 'Product Variance', 'Start Date', 'End Date']]
+    Product_Roadmap = Product_Roadmap.sort_values(by=['Name', 'Configurations', 'Version'])
 except KeyError:
     Product_Roadmap = product_roadmap_df
 
