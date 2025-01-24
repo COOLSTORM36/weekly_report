@@ -56,8 +56,8 @@ for column in columns_to_check:
     if column not in product_roadmap_df.columns:
         product_roadmap_df[column] = ''
 
-product_roadmap_df['Configurations'] = product_roadmap_df['Configurations'].fillna('')
-product_roadmap_df['Product Variance'] = product_roadmap_df['Product Variance'].fillna('')
+product_roadmap_df['Configurations'] = product_roadmap_df['Configurations'].fillna('').astype(str)
+product_roadmap_df['Product Variance'] = product_roadmap_df['Product Variance'].fillna('').astype(str)
 
 try:
     Product_Roadmap = product_roadmap_df[['Name', 'Configurations', 'Version', 'Product Variance', 'Start Date', 'End Date']]
