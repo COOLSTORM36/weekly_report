@@ -179,7 +179,7 @@ st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/pag9rGZ4MM7Iy
 # ------------------------------------------------------------------------------------------------
 st.header("2. 关键需求管理（Kayla）")
 st.subheader("a) RMT会议纪要")
-RMT.index = [''] * len(RMT)
+# RMT.index = [''] * len(RMT)
 # st.table(RMT)
 
 # ------------------------------------------------------------------------------------------------
