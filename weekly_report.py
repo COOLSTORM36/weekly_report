@@ -66,36 +66,36 @@ except KeyError:
     Product_Roadmap = product_roadmap_df
 
 # fetch the data from RMT requirement list
-RMT_TAB = Table(None, RMT_base, 'Requirement List')
-condition = match({"RMT会议": True})
-RMT_result = RMT_TAB.all(formula=condition)
+# RMT_TAB = Table(None, RMT_base, 'Requirement List')
+# condition = match({"RMT会议": True})
+# RMT_result = RMT_TAB.all(formula=condition)
 
-RMT_flattened_data = []
-for item in RMT_result:
-    flat_item = item['fields']
-    RMT_flattened_data.append(flat_item)
+# RMT_flattened_data = []
+# for item in RMT_result:
+#     flat_item = item['fields']
+#     RMT_flattened_data.append(flat_item)
 
-RMT_df = pd.DataFrame(RMT_flattened_data)
+# RMT_df = pd.DataFrame(RMT_flattened_data)
 
-# Ensure columns '研发承诺时间.' and '预测交付时间.' exist in the DataFrame
-columns_to_check = ['研发承诺时间.', '预测交付时间.', '研发进展更新']
-for column in columns_to_check:
-    if column not in RMT_df.columns:
-        RMT_df[column] = ''
+# # Ensure columns '研发承诺时间.' and '预测交付时间.' exist in the DataFrame
+# columns_to_check = ['研发承诺时间.', '预测交付时间.', '研发进展更新']
+# for column in columns_to_check:
+#     if column not in RMT_df.columns:
+#         RMT_df[column] = ''
 
-RMT_df['研发承诺时间.'] = RMT_df['研发承诺时间.'].fillna('')
-RMT_df['预测交付时间.'] = RMT_df['预测交付时间.'].fillna('')
-RMT_df['研发进展更新'] = RMT_df['研发进展更新'].fillna('')
+# RMT_df['研发承诺时间.'] = RMT_df['研发承诺时间.'].fillna('')
+# RMT_df['预测交付时间.'] = RMT_df['预测交付时间.'].fillna('')
+# RMT_df['研发进展更新'] = RMT_df['研发进展更新'].fillna('')
 
-priority_order = ["最高", "高", "中", "低"]
-RMT_df['需求优先级'] = pd.Categorical(RMT_df['需求优先级 Priority'], categories=priority_order, ordered=True)
+# priority_order = ["最高", "高", "中", "低"]
+# RMT_df['需求优先级'] = pd.Categorical(RMT_df['需求优先级 Priority'], categories=priority_order, ordered=True)
 
-try:
-    RMT = RMT_df[['需求简述 Requirement description', '国家/区域', 'Status Name', '需求优先级', '研发进展更新', '研发承诺时间.', '预测交付时间.']]
-except KeyError:
-    RMT = RMT_df
+# try:
+#     RMT = RMT_df[['需求简述 Requirement description', '国家/区域', 'Status Name', '需求优先级', '研发进展更新', '研发承诺时间.', '预测交付时间.']]
+# except KeyError:
+#     RMT = RMT_df
 
-RMT = RMT.sort_values(by=['国家/区域', 'Status Name', '需求优先级'], ascending=[True, False, True])
+# RMT = RMT.sort_values(by=['国家/区域', 'Status Name', '需求优先级'], ascending=[True, False, True])
 
 # fetch the data from market insight
 MARKET_INSIGHT_TAB = Table(None, solution_base, '市场洞察')
@@ -180,7 +180,7 @@ st.markdown('Click <a href="https://airtable.com/appyobVRNRPGJFNSV/pag9rGZ4MM7Iy
 st.header("2. 关键需求管理（Kayla）")
 st.subheader("a) RMT会议纪要")
 RMT.index = [''] * len(RMT)
-st.table(RMT)
+# st.table(RMT)
 
 # ------------------------------------------------------------------------------------------------
 st.header("3. 样机管理(Kayla & Weisheng)")
